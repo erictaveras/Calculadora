@@ -1,0 +1,59 @@
+﻿@model Calculadora.Models.OperacionModel
+
+@{
+    ViewData["Title"] = "Calculadora";
+}
+
+<div class="container mt-5" style="max-width: 500px;">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>🧮 Calculadora</h3>
+        </div>
+        <div class="card-body">
+
+            <form asp-controller="Calculadora" asp-action="Index" method="post">
+
+                <div class="mb-3">
+                    <label asp-for="Numero1" class="form-label"></label>
+                    <input asp-for="Numero1" class="form-control" step="any" />
+                    <span asp-validation-for="Numero1" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Numero2" class="form-label"></label>
+                    <input asp-for="Numero2" class="form-control" step="any" />
+                    <span asp-validation-for="Numero2" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Operacion" class="form-label"></label>
+                    <select asp-for="Operacion" class="form-select">
+                        <option value="suma">➕ Suma</option>
+                        <option value="resta">➖ Resta</option>
+                        <option value="multiplicacion">✖️ Multiplicación</option>
+                        <option value="division">➗ División</option>
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Calcular</button>
+                </div>
+
+            </form>
+
+            @if (Model.Error != null)
+            {
+                <div class="alert alert-danger mt-4 text-center">
+                    ⚠️ @Model.Error
+                </div>
+            }
+            else if (Model.Resultado != null)
+            {
+                <div class="alert alert-success mt-4 text-center">
+                    <h4>Resultado: @Model.Resultado</h4>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
